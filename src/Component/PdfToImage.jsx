@@ -4,6 +4,7 @@ const PDFJS = window.pdfjsLib;
 
 console.log(window.pdfjsLib);
 const PdfToImage = () => {
+  const [open, setOpen] = useState(false);
   const [pdf, setPdf] = useState("");
   const [width, setWidth] = useState(0);
   const [image, setImage] = useState("");
@@ -68,85 +69,90 @@ const PdfToImage = () => {
   }, [pdf, currentPage]);
 
   return (
-    <div className="">
-      <button
-        className="custom-btn btn-tomato custom-btn-lg"
-        id="upload-button"
-        onClick={() => document.getElementById("file-to-upload").click()}
-      >
-        Select PDF
-      </button>
-      <input
-        type="file"
-        id="file-to-upload"
-        accept="application/pdf"
-        hidden
-        onChange={showPdf}
-      />
-      <div id="pdf-main-container">
-        <div id="pdf-loader" hidden={!pdfRendering}>
-          Loading document ...
-        </div>
-        {image && (
-          <div id="pdf-meta" className="main-container">
-            <div id="pdf-buttons">
-              <button
-                className="custom-btn custom-btn-md btn-green"
-                id="pdf-prev"
-                onClick={() => {
-                  if (currentPage > 1) {
-                    changePage(currentPage - 1);
-                  } else {
-                    return null;
-                  }
-                }}
-              >
-                Previous
-              </button>
-              <button
-                className="custom-btn custom-btn-md btn-red"
-                id="pdf-next"
-                onClick={() => {
-                  if (currentPage < totalPages) {
-                    changePage(currentPage + 1);
-                  } else {
-                    return null;
-                  }
-                }}
-              >
-                Next
-              </button>
-            </div>
-            <h3 id="page-count-container" className="page-text">
-              Page {currentPage} of{" "}
-              <span id="pdf-total-pages">{totalPages}</span>
-            </h3>
+    <div className={`pdf-container ${open ? "h-100" : "h-vh"}`}>
+      <div>
+        <button
+          className="custom-btn btn-tomato custom-btn-lg"
+          id="upload-button"
+          onClick={() => {
+            document.getElementById("file-to-upload").click();
+            setOpen(true);
+          }}
+        >
+          Select PDF
+        </button>
+        <input
+          type="file"
+          id="file-to-upload"
+          accept="application/pdf"
+          hidden
+          onChange={showPdf}
+        />
+        <div id="pdf-main-container">
+          <div id="pdf-loader" hidden={!pdfRendering}>
+            Loading document ...
           </div>
-        )}
-        <div id="pdf-contents">
-          <div id="image-convas-row">
-            <canvas id="pdf-canvas" width={width} height={height}></canvas>
+          {image && (
+            <div id="pdf-meta" className="main-container">
+              <div id="pdf-buttons">
+                <button
+                  className="custom-btn custom-btn-md btn-green"
+                  id="pdf-prev"
+                  onClick={() => {
+                    if (currentPage > 1) {
+                      changePage(currentPage - 1);
+                    } else {
+                      return null;
+                    }
+                  }}
+                >
+                  Previous
+                </button>
+                <button
+                  className="custom-btn custom-btn-md btn-red"
+                  id="pdf-next"
+                  onClick={() => {
+                    if (currentPage < totalPages) {
+                      changePage(currentPage + 1);
+                    } else {
+                      return null;
+                    }
+                  }}
+                >
+                  Next
+                </button>
+              </div>
+              <h3 id="page-count-container" className="page-text">
+                Page {currentPage} of{" "}
+                <span id="pdf-total-pages">{totalPages}</span>
+              </h3>
+            </div>
+          )}
+          <div id="pdf-contents">
+            <div id="image-convas-row">
+              <canvas id="pdf-canvas" width={width} height={height}></canvas>
+              {image && (
+                <img
+                  id="image-generated"
+                  src={image}
+                  alt="pdfImage"
+                  style={{ width: width, height: height }}
+                />
+              )}
+            </div>
+            <div id="page-loader" hidden={!pageRendering}>
+              Loading page ...
+            </div>
+
             {image && (
-              <img
-                id="image-generated"
-                src={image}
-                alt="pdfImage"
-                style={{ width: width, height: height }}
-              />
+              <a href={image} download className="download-container">
+                <div className="custom-btn btn-tomato custom-btn-lg download-box">
+                  <AiOutlineDownload />
+                  <span>Download This Page</span>
+                </div>
+              </a>
             )}
           </div>
-          <div id="page-loader" hidden={!pageRendering}>
-            Loading page ...
-          </div>
-
-          {image && (
-            <a href={image} download className="download-container">
-              <div className="custom-btn btn-tomato custom-btn-lg download-box">
-                <AiOutlineDownload />
-                <span>Download This Page</span>
-              </div>
-            </a>
-          )}
         </div>
       </div>
     </div>

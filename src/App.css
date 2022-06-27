@@ -1,7 +1,15 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+.h-100 {
+  height: 100%;
 }
+.h-vh {
+  height: 100vh;
+}
+.pdf-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .custom-btn {
   border: 1px solid #fff;
   border-radius: 15px;
@@ -17,7 +25,10 @@
 .btn-green {
   background-color: green;
 }
-
+.btn-link a {
+  text-decoration: none;
+  color: #fff;
+}
 .custom-btn-lg {
   padding: 15px 40px;
   font-size: 18px;
@@ -111,4 +122,92 @@
 #image-generated {
   margin-left: 20px;
   border: 1px solid green;
+}
+
+/* sidebar */
+
+.custom-flex-beetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.custom-head {
+  position: relative;
+}
+.sidebar-container {
+  position: absolute;
+  text-align: left;
+  left: 0;
+
+  width: 27%;
+  height: 100%;
+  background-color: #fff;
+  border: 1px solid #dddddd;
+}
+.width-27 {
+  width: 27%;
+  padding: 15px;
+}
+.width-2 {
+  width: 0%;
+  padding: 0px;
+}
+.sidebar-menu-style {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.sidebar-menu-container {
+  padding-left: 10px;
+}
+.sidebar-main-menu {
+  padding-left: 10px;
+}
+.sidbebar-sub-menu {
+  padding-left: 10px;
+}
+.report-list-container {
+  position: relative;
+}
+.menu-list {
+  list-style: none;
+  position: absolute;
+  right: 40px;
+  padding: 10px 40px 10px 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: -10px;
+}
+.menu-list a {
+  text-decoration: none;
+}
+.menu-list li {
+  padding-bottom: 10px;
+}
+.hidden {
+  display: none;
+}
+.block {
+  display: block;
+}
+
+/* text */
+.text-highlight-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.text-highlight {
+  font-size: 50px;
+}
+.menu-icon {
+  position: absolute;
+  left: 90%;
+  top: 10px;
+  z-index: 10;
+}
+.cross-icon {
+  margin-left: 20px;
+  font-size: 25px;
 }
