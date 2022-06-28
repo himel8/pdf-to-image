@@ -8,6 +8,7 @@ const Home = () => {
       <SideBar />
       <Routes>
         <Route path="/pdf-to-img" element={<PdfToImage />} />
+        <Route path="/" element={<CommingSoon />} />
         <Route path="/html-report" element={<CommingSoon />} />
         <Route path="/message-report" element={<CommingSoon />} />
         <Route path="/whatsapp-report" element={<CommingSoon />} />
